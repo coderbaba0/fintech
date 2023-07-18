@@ -3,6 +3,8 @@ import 'package:carousel_slider/carousel_options.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
+import 'notifications/notifications.dart';
+
 class Home_Widget extends StatefulWidget {
   const    Home_Widget({Key? key}) : super(key: key);
 
@@ -64,8 +66,14 @@ class _Home_WidgetState extends State<Home_Widget> {
           Padding(
             padding: const EdgeInsets.only(right: 10.0),
             child: 
-            Badge(smallSize: 10,
-                child: Image.asset("images/bell.png",width: 25,color: Theme.of(context).primaryColor,)),
+            InkWell(
+              onTap: (){
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> Notifications()));
+
+              },
+              child: Badge(smallSize: 10,
+                  child: Image.asset("images/bell.png",width: 25,color: Theme.of(context).primaryColor,)),
+            ),
           )
         ],
       ),
@@ -634,7 +642,7 @@ class _Home_WidgetState extends State<Home_Widget> {
                 height: 10,
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 8.0, right: 8, top: 13),
+                padding: const EdgeInsets.only(left: 8.0, right: 8, top: 0,bottom: 20),
                 child: SizedBox(
                   height: MediaQuery.of(context).size.height * 0.19,
                   width: double.infinity,
@@ -647,7 +655,7 @@ class _Home_WidgetState extends State<Home_Widget> {
                           borderRadius: BorderRadius.circular(20),
                           child: Image.asset(
                             item,
-                            fit: BoxFit.cover,
+                            fit: BoxFit.fitWidth,
                             width: double.infinity,
                           ),
                         ),

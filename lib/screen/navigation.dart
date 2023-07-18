@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 import 'home.dart';
 import 'leads.dart';
+
 class Navigation_Widget extends StatefulWidget {
   const Navigation_Widget({Key? key}) : super(key: key);
   @override
@@ -14,70 +15,109 @@ class Navigation_Widget extends StatefulWidget {
 class _Navigation_WidgetState extends State<Navigation_Widget> {
   final _pageController = PageController(initialPage: 0);
 
-
   int maxCount = 5;
   void dispose() {
     _pageController.dispose();
     super.dispose();
   }
-   List<Widget> bottomBarPages = [
-     Home_Widget(),
-     Leads_Widget(),
-     CreaditCard_Widget(),
-     Referral_Widget(),
-     My_Team_Widget()
+
+  List<Widget> bottomBarPages = [
+    Home_Widget(),
+    Leads_Widget(),
+    CreaditCard_Widget(),
+    Referral_Widget(),
+    My_Team_Widget()
   ];
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
-        body: PageView(
-          controller: _pageController,
-          physics: const NeverScrollableScrollPhysics(),
-          children: List.generate(
-              bottomBarPages.length, (index) => bottomBarPages[index]),
-        ),
+      body: PageView(
+        controller: _pageController,
+        physics: const NeverScrollableScrollPhysics(),
+        children: List.generate(
+            bottomBarPages.length, (index) => bottomBarPages[index]),
+      ),
       extendBody: true,
-      bottomNavigationBar: (bottomBarPages.length <= maxCount)
-          ? BottomNavigationBar(
-        backgroundColor: Theme.of(context).primaryColor,
-          onTap: (index) {
-            _pageController.jumpToPage(index);
-          },
-          items: [BottomNavigationBarItem(icon:Icon(Icons.home_filled,color: Theme.of(context).primaryColor),label:  "Home", ),
-        BottomNavigationBarItem(icon:Icon(Icons.note_rounded,color: Theme.of(context).primaryColor),label:  "Leads" ),
-        BottomNavigationBarItem(icon:Icon(Icons.add,size: 30,color: Theme.of(context).primaryColor,),label:  "" ),
-        BottomNavigationBarItem(icon:Icon(Icons.group_add,color: Theme.of(context).primaryColor),label:  "Refferral" ),
-        BottomNavigationBarItem(icon:Icon(Icons.group,color: Theme.of(context).primaryColor),label:  "Leads" ),
+      // bottomNavigationBar: (bottomBarPages.length <= maxCount)
+      //   ?
+      //   BottomNavigationBar(
+      //   selectedItemColor: Colors.green,
+      //   backgroundColor: Theme.of(context).primaryColor,
+      //     onTap: (index) {
+      //       _pageController.jumpToPage(index);
+      //     },
+      //     items: [BottomNavigationBarItem(icon:Icon(Icons.home_filled,color: Theme.of(context).primaryColor),label:  "Home", ),
+      //   BottomNavigationBarItem(icon:Icon(Icons.timer,color: Theme.of(context).primaryColor),label:  "History" ),
+      //   BottomNavigationBarItem(icon:Icon(Icons.add,size: 30,color: Theme.of(context).primaryColor,),label:  "" ),
+      //   BottomNavigationBarItem(icon:Icon(Icons.group_add,color: Theme.of(context).primaryColor),label:  "Refferral" ),
+      //   BottomNavigationBarItem(icon:Icon(Icons.group,color: Theme.of(context).primaryColor),label:  "Leads" ),
+      //
+      // ])
+      //       :null,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        onPressed: () {},
+        child: Container(
+            height: 60,
+            width: 60,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(50.0),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(5.0),
+              child: Icon(
+                Icons.qr_code_2,
+                size: 40,
+                color: Colors.green,
+              ),
+            )),
+      ),
+      bottomNavigationBar: BottomAppBar(
+        padding: EdgeInsets.only(top: 8.0),
+        elevation: 0,
+        color: Colors.transparent,
+        clipBehavior: Clip.antiAlias,
+        notchMargin: 7,
+        shape: CircularNotchedRectangle(),
+        child: Wrap(
+          runAlignment: WrapAlignment.spaceBetween,
+          alignment: WrapAlignment.spaceBetween,
+          children: [
+            (bottomBarPages.length <= maxCount)
+                ? BottomNavigationBar(
+                    elevation: 0,
+                    type: BottomNavigationBarType.fixed,
 
-      ])
-      // AnimatedNotchBottomBar(
-      //   notchBottomBarController: _controller,
-      //   color:  Colors.black,
-      //   showLabel: false,
-      //   notchColor: Colors.white,
-      //   removeMargins: false,
-      //   bottomBarWidth: 500,
-      //   durationInMilliSeconds: 300,
-      //   bottomBarItems: [
-      //     BottomBarItem(inActiveItem: Icon(Icons.home_filled,color: Colors.grey,),itemLabel: "Home", activeItem: Icon(Icons.home_filled),),
-      //     BottomBarItem(inActiveItem: Icon(Icons.note_rounded,color: Colors.grey,),itemLabel: "Leads", activeItem: Icon(Icons.note_rounded),),
-      //     BottomBarItem(inActiveItem: GestureDetector(
-      //       onTap: (){
-      //         Navigator.push(context, MaterialPageRoute(builder: (context)=>CreaditCard_Widget()));
-      //       },
-      //         child: Icon(Icons.add,size: 30,)),itemLabel: "", activeItem: GestureDetector(
-      //       onTap: (){
-      //         Navigator.push(context, MaterialPageRoute(builder: (context)=>CreaditCard_Widget()));
-      //
-      //       },
-      //         child: Icon(Icons.add,size: 30,color: Colors.red,)),),
-      //     BottomBarItem(inActiveItem: Icon(Icons.group_add,color: Colors.grey,),itemLabel: "Refferral", activeItem: Icon(Icons.group_add),),
-      //     BottomBarItem(inActiveItem: Icon(Icons.group,color: Colors.grey,),itemLabel: "My Team", activeItem: Icon(Icons.group,),),
-      //   ], onTap: (index) {
-      //   _pageController.jumpToPage(index);
-      //
-         :null,
+                    onTap: (index) {
+                      _pageController.jumpToPage(index);
+                    },
+                    items: [
+                      BottomNavigationBarItem(
+                        icon: Icon(Icons.home,
+                            color: Theme.of(context).primaryColor),
+                        label: "Home",
+                      ),
+                      BottomNavigationBarItem(
+                          icon: Icon(Icons.timer,
+                              color: Theme.of(context).primaryColor),
+                          label: "History"),
+                      BottomNavigationBarItem(
+                          icon: Icon(Icons.percent,
+                              color: Theme.of(context).primaryColor),
+                          label: "Offers"),
+                      BottomNavigationBarItem(
+                          icon: Icon(Icons.person,
+                              color: Theme.of(context).primaryColor),
+                          label: "Profile"),
+                    ],
+                  )
+                : Container(),
+          ],
+        ),
+      ),
     );
   }
 }

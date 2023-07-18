@@ -19,10 +19,9 @@ ThemeData lightTheme = ThemeData(
       fontWeight: FontWeight.bold,
     ),
   ),
-  bottomNavigationBarTheme: BottomNavigationBarThemeData(selectedIconTheme: IconThemeData(size: 25,color: Colors.purple)),
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
-      backgroundColor: Colors.deepPurple,
+      backgroundColor: Colors.green,
       foregroundColor: Colors.white,
       textStyle: const TextStyle(fontSize: 16.0),
       padding: const EdgeInsets.symmetric(horizontal: 14.0, vertical: 12.0),
@@ -50,10 +49,9 @@ ThemeData lightTheme = ThemeData(
 ThemeData darkTheme = ThemeData(
   primaryColor: Colors.white,
   primaryColorDark: Colors.green,
-
   fontFamily: ('Poppins'),
   useMaterial3: true,
-  primarySwatch: Colors.deepPurple,
+  primarySwatch: Colors.green,
   brightness: Brightness.dark,
   appBarTheme:  AppBarTheme(
     backgroundColor: Colors.black.withOpacity(.5),
@@ -66,7 +64,7 @@ ThemeData darkTheme = ThemeData(
   ),
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
-      backgroundColor: Colors.deepPurple,
+      backgroundColor: Colors.green,
       foregroundColor: Colors.white,
       textStyle: const TextStyle(fontSize: 16.0),
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
