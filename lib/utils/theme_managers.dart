@@ -1,16 +1,20 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 
 ThemeData lightTheme = ThemeData(
   primaryColor: Colors.black54,
   primaryColorDark: Colors.green,
+  primaryColorLight: Colors.white,
   fontFamily: ('Poppins'),
   primarySwatch: Colors.blue,
   useMaterial3: true,
   brightness: Brightness.light,
   appBarTheme: const AppBarTheme(
+    systemOverlayStyle: SystemUiOverlayStyle(statusBarColor: Colors.transparent,statusBarIconBrightness: Brightness.dark),
+
     color: Colors.white,
     iconTheme: IconThemeData(color: Colors.black),
     titleTextStyle: TextStyle(
@@ -19,6 +23,7 @@ ThemeData lightTheme = ThemeData(
       fontWeight: FontWeight.bold,
     ),
   ),
+  // bottomNavigationBarTheme: BottomNavigationBarThemeData(selectedItemColor: Colors.white,selectedLabelStyle: TextStyle(fontWeight: FontWeight.bold)),
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
       backgroundColor: Colors.green,
@@ -48,12 +53,15 @@ ThemeData lightTheme = ThemeData(
 
 ThemeData darkTheme = ThemeData(
   primaryColor: Colors.white,
-  primaryColorDark: Colors.green,
+  primaryColorDark: Colors.white,
+  primaryColorLight: Colors.green,
   fontFamily: ('Poppins'),
   useMaterial3: true,
   primarySwatch: Colors.green,
   brightness: Brightness.dark,
   appBarTheme:  AppBarTheme(
+    systemOverlayStyle: SystemUiOverlayStyle(statusBarColor: Colors.transparent,statusBarIconBrightness: Brightness.light),
+
     backgroundColor: Colors.black.withOpacity(.5),
     iconTheme: const IconThemeData(color: Colors.white),
     titleTextStyle: const TextStyle(
@@ -62,6 +70,7 @@ ThemeData darkTheme = ThemeData(
       fontWeight: FontWeight.bold,
     ),
   ),
+  // bottomNavigationBarTheme: BottomNavigationBarThemeData(selectedItemColor: Colors.white,selectedLabelStyle: TextStyle(fontWeight: FontWeight.bold)),
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
       backgroundColor: Colors.green,

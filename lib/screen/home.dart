@@ -2,6 +2,7 @@ import 'package:banking/screen/profile/my_profile.dart';
 import 'package:carousel_slider/carousel_options.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'notifications/notifications.dart';
 
@@ -69,7 +70,6 @@ class _Home_WidgetState extends State<Home_Widget> {
             InkWell(
               onTap: (){
                 Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> Notifications()));
-
               },
               child: Badge(smallSize: 10,
                   child: Image.asset("images/bell.png",width: 25,color: Theme.of(context).primaryColor,)),

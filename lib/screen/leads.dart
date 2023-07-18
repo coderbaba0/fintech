@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
-class Leads_Widget extends StatefulWidget {
-  const Leads_Widget({Key? key}) : super(key: key);
+class History extends StatefulWidget {
+  const History({Key? key}) : super(key: key);
 
 
 
 
   @override
-  State<Leads_Widget> createState() => _Leads_WidgetState();
+  State<History> createState() => _HistoryState();
 }
 
-class _Leads_WidgetState extends State<Leads_Widget> with TickerProviderStateMixin{
+class _HistoryState extends State<History> with TickerProviderStateMixin{
   late TabController _tabController;
 
 
@@ -31,7 +31,7 @@ class _Leads_WidgetState extends State<Leads_Widget> with TickerProviderStateMix
 
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.only(top: 5,bottom: 15,left: 10,right: 10),
+        padding: const EdgeInsets.only(top: 10,bottom: 15,left: 10,right: 10),
         child: Container(
           height:  MediaQuery.of(context).size.height*1,
           width: MediaQuery.of(context).size.width*1,
@@ -59,7 +59,7 @@ class _Leads_WidgetState extends State<Leads_Widget> with TickerProviderStateMix
                           height: MediaQuery.of(context).size.height*0.05,
                           child: Tab(child: Padding(
                             padding: const EdgeInsets.only(left: 10.0,right: 10),
-                            child: Text("Potential Leads",style: TextStyle( fontFamily: "Poppins",fontSize: 17,color:  Theme.of(context).primaryColor),),
+                            child: Text("Potential ",style: TextStyle( fontFamily: "Poppins",fontSize: 17,color:  Theme.of(context).primaryColor),),
                           ),),
                         ),
                       ],
@@ -83,11 +83,11 @@ class _Leads_WidgetState extends State<Leads_Widget> with TickerProviderStateMix
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(10),
                                       gradient: LinearGradient(
-                                          begin: Alignment.topCenter,
-                                          end: Alignment.bottomCenter,
+                                          begin: Alignment.centerLeft,
+                                          end: Alignment.centerRight,
                                           colors: [
-                                            Color(0xFF086C57),
-                                            Color(0xFF199F85)
+                                            Color(0xFFCBEEBA),
+                                            Color(0xFFFFB6B6),
                                           ])),
                                   child: Padding(
                                     padding: const EdgeInsets.all(12),
@@ -106,14 +106,14 @@ class _Leads_WidgetState extends State<Leads_Widget> with TickerProviderStateMix
                                                     style: TextStyle(
                                                       fontFamily: "Poppins",
                                                         fontWeight: FontWeight.w500,
-                                                        color: Colors.white,fontSize: 16),
+                                                        color:Colors.black87,fontSize: 16),
                                                   ),
                                                   Text(
                                                     "See all leads here",
                                                     style: TextStyle(
                                                         fontSize: 13,
                                                         fontWeight: FontWeight.w400,
-                                                        color: Colors.white),
+                                                        color: Colors.black87),
                                                   )
                                                 ],
                                               ),
@@ -131,7 +131,7 @@ class _Leads_WidgetState extends State<Leads_Widget> with TickerProviderStateMix
                                         SizedBox(height: _size.height*0.02,),
                                         Divider(
                                           thickness: 1.5,
-                                          color: Colors.white,
+                                          color: Colors.black26,
                                         ),
                                         SizedBox(height: _size.height*0.02,),
 
@@ -146,7 +146,7 @@ class _Leads_WidgetState extends State<Leads_Widget> with TickerProviderStateMix
                                                   style: TextStyle(
                                                       fontSize: 16,
                                                       fontWeight: FontWeight.w500,
-                                                      color: Colors.white.withOpacity(0.9)),
+                                                      color: Colors.black87.withOpacity(0.9)),
                                                 ),
                                                 Container(
                                                   width: _size.width*0.15,
@@ -159,7 +159,7 @@ class _Leads_WidgetState extends State<Leads_Widget> with TickerProviderStateMix
                                                         fontSize: 10,
                                                         fontWeight: FontWeight.w400,
 
-                                                        color: Colors.white.withOpacity(0.9)),textAlign: TextAlign.center,
+                                                        color: Colors.black87.withOpacity(0.9)),textAlign: TextAlign.center,
                                                   ),
                                                 ),
                                               ],
@@ -171,7 +171,7 @@ class _Leads_WidgetState extends State<Leads_Widget> with TickerProviderStateMix
                                                   style: TextStyle(
                                                       fontSize: 16,
                                                       fontWeight: FontWeight.w400,
-                                                      color: Colors.white.withOpacity(0.9)),
+                                                      color: Colors.black87.withOpacity(0.9)),
                                                 ),
                                                 Container(
                                                   width: 70,
@@ -183,7 +183,7 @@ class _Leads_WidgetState extends State<Leads_Widget> with TickerProviderStateMix
                                                         fontFamily: "Poppins",
                                                         fontSize: 10,
                                                         fontWeight: FontWeight.w400,
-                                                        color: Colors.white.withOpacity(0.9)),textAlign: TextAlign.center,
+                                                        color: Colors.black87.withOpacity(0.9)),textAlign: TextAlign.center,
                                                   ),
                                                 ),
                                               ],
@@ -195,7 +195,7 @@ class _Leads_WidgetState extends State<Leads_Widget> with TickerProviderStateMix
                                                   style: TextStyle(
                                                       fontSize: 16,
                                                       fontWeight: FontWeight.w500,
-                                                      color: Colors.white.withOpacity(0.9)),
+                                                      color:Colors.black87.withOpacity(0.9)),
                                                 ),
                                                 Container(
                                                   width: 70,
@@ -207,7 +207,7 @@ class _Leads_WidgetState extends State<Leads_Widget> with TickerProviderStateMix
                                                         fontFamily: "Poppins",
                                                         fontSize: 10,
                                                         fontWeight: FontWeight.w400,
-                                                        color: Colors.white.withOpacity(0.9)),textAlign: TextAlign.center,
+                                                        color: Colors.black87.withOpacity(0.9)),textAlign: TextAlign.center,
                                                   ),
                                                 ),
                                               ],
@@ -219,7 +219,7 @@ class _Leads_WidgetState extends State<Leads_Widget> with TickerProviderStateMix
                                                   style: TextStyle(
                                                       fontSize: 16,
                                                       fontWeight: FontWeight.w500,
-                                                      color: Colors.white.withOpacity(0.9)),
+                                                      color: Colors.black87.withOpacity(0.9)),
                                                 ),
                                                 Container(
                                                   width: 70,
@@ -231,7 +231,7 @@ class _Leads_WidgetState extends State<Leads_Widget> with TickerProviderStateMix
                                                         fontFamily: "Poppins",
                                                         fontSize: 10,
                                                         fontWeight: FontWeight.w400,
-                                                        color: Colors.white.withOpacity(0.9)),textAlign: TextAlign.center,
+                                                        color:Colors.black87.withOpacity(0.9)),textAlign: TextAlign.center,
                                                   ),
                                                 ),
 

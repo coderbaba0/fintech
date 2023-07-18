@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 
 class Notifications extends StatefulWidget {
@@ -14,14 +13,13 @@ class _NotificationsState extends State<Notifications> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          systemOverlayStyle: SystemUiOverlayStyle(statusBarColor: Colors.green,statusBarIconBrightness: Brightness.light),
-
+        centerTitle: true,
+          title: Text( "Notifications",style:TextStyle(fontSize: 18,)),
           leading: GestureDetector(
               onTap: (){
                 Navigator.pop(context);
               },
               child: Icon(Icons.close)),
-          title: Text( "Notifications",style:TextStyle(fontSize: 18,))
         // Text("Notifications",style: TextStyle(fontSize: 20),),
       ),
       body: Center(
@@ -32,7 +30,7 @@ class _NotificationsState extends State<Notifications> {
             Text( "Check after Some time",style:TextStyle(fontSize: 14,)),
 
             SizedBox(height: 50,),
-            Image.asset("asset/images/notification.png",height:150,)
+            Image.asset("images/notification.png",height:150,)
           ],
         ),
       ),

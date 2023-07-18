@@ -41,12 +41,12 @@ class _MyProfile_WidgetState extends State<MyProfile_Widget> {
               child: Text("My Profile",style: TextStyle(fontSize: 18),),
             ),
           Spacer(),
-          GestureDetector(
-            onTap: (){
-              Navigator.push(context, MaterialPageRoute(builder: (context)=>Language_Widget()));
-            },
-              child: Image.asset("images/translate.png",height: 40,width: 30,color: Color(
-                  0xFFFFFFFF),))
+          // GestureDetector(
+          //   onTap: (){
+          //     Navigator.push(context, MaterialPageRoute(builder: (context)=>Language_Widget()));
+          //   },
+          //     child: Image.asset("images/translate.png",height: 40,width: 30,color: Color(
+          //         0xFFFFFFFF),))
           ],
         ),
       ),
@@ -62,11 +62,11 @@ class _MyProfile_WidgetState extends State<MyProfile_Widget> {
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
                     gradient: LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
+                        begin: Alignment.centerLeft,
+                        end: Alignment.centerRight,
                         colors: [
-                          Color(0xFF086C57),
-                          Color(0xFF199F85)
+                          Color(0xFFCBEEBA),
+                          Color(0xFFFFB6B6),
                         ])),
                 child: Padding(
                   padding: const EdgeInsets.all(20),
@@ -135,9 +135,9 @@ class _MyProfile_WidgetState extends State<MyProfile_Widget> {
                                 ));
                               },
                               child: CircleAvatar(
-                                backgroundColor: Colors.white,
+                                backgroundColor: Theme.of(context).primaryColorDark,
                                 radius: 15,
-                                child: Icon(Icons.camera_alt_outlined,size: 20),
+                                child: Icon(Icons.camera_alt_outlined,size: 20,color: Theme.of(context).primaryColorLight),
                               ),
                             ),
                           )
@@ -149,15 +149,13 @@ class _MyProfile_WidgetState extends State<MyProfile_Widget> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text("Abhay Prasad",style: TextStyle(fontSize: 18,color: Colors.white.withOpacity(0.9)),),
-                            Text("ADVISOR CODE : 201828398",style: TextStyle(fontSize: 10,fontWeight: FontWeight.w500,color: Colors.white.withOpacity(0.9)),),
+                            Text("Abhishek Kumar",style: TextStyle(fontSize: 18,color: Theme.of(context).primaryColorLight),),
+                            Text("Reffrel ID : 201525",style: TextStyle(fontSize: 10,fontWeight: FontWeight.w500,color: Theme.of(context).primaryColorLight),),
                             SizedBox(height: 8,),
                             Container(
 
                                 child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(primary: Color(
-                                      0xFFC58FEE)),
-                                    onPressed: (){}, child: Text("Share Profile",style: TextStyle(color: Colors.white.withOpacity(0.9)),)))
+                                    onPressed: (){}, child: Text("View Account",style: TextStyle(color: Colors.white.withOpacity(0.9)),)))
                           ],
                         ),
                       )
@@ -223,10 +221,11 @@ class _MyProfile_WidgetState extends State<MyProfile_Widget> {
                 ),
               ),
               ListTile(
+                onTap: (){},
                 leading: Image.asset("images/trophy.png",height: Size.toDouble(),color: Theme.of(context).primaryColor),
-                title: Text("Contest History",style: TextStyle(fontFamily: "Poppins"),),
+                title: Text("Coins & Reward",style: TextStyle(fontFamily: "Poppins"),),
                 trailing: CircleAvatar(
-                  backgroundColor: Color(0xFF086C57),
+                  backgroundColor: Color(0xFF1FA403),
                   radius: 15,
                   child: Icon(Icons.arrow_forward_ios_rounded,color: Colors.white,size: 18,)
                 ),
@@ -238,7 +237,7 @@ class _MyProfile_WidgetState extends State<MyProfile_Widget> {
                 trailing: Container(
 
                   child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(primary: Color(0xFFC58FEE)),
+                    style: ElevatedButton.styleFrom(primary: Color(0xFF1FA403)),
                     onPressed: (){},child: Text("SETUP",style: TextStyle(color: Colors.white,fontSize: 15),),),
                 ),
               ),

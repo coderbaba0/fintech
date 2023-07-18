@@ -23,9 +23,9 @@ class _Navigation_WidgetState extends State<Navigation_Widget> {
 
   List<Widget> bottomBarPages = [
     Home_Widget(),
-    Leads_Widget(),
+    History(),
     CreaditCard_Widget(),
-    Referral_Widget(),
+    Profile(),
     My_Team_Widget()
   ];
   @override
@@ -55,32 +55,35 @@ class _Navigation_WidgetState extends State<Navigation_Widget> {
       // ])
       //       :null,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        onPressed: () {},
-        child: Container(
-            height: 60,
-            width: 60,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(50.0),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(5.0),
-              child: Icon(
-                Icons.qr_code_2,
-                size: 40,
-                color: Colors.green,
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.only(top: 15.0),
+        child: FloatingActionButton(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          onPressed: () {},
+          child: Container(
+              height: 60,
+              width: 60,
+              decoration: BoxDecoration(
+                color: Theme.of(context).primaryColorDark,
+                borderRadius: BorderRadius.circular(50.0),
               ),
-            )),
+              child: Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: Icon(
+                  Icons.qr_code_2,
+                  size: 40,
+                  color: Theme.of(context).primaryColorLight,
+                ),
+              )),
+        ),
       ),
       bottomNavigationBar: BottomAppBar(
-        padding: EdgeInsets.only(top: 8.0),
+        padding: EdgeInsets.only(top: 25.0),
         elevation: 0,
-        color: Colors.transparent,
+        color:Colors.transparent,
         clipBehavior: Clip.antiAlias,
-        notchMargin: 7,
+        notchMargin: 15,
         shape: CircularNotchedRectangle(),
         child: Wrap(
           runAlignment: WrapAlignment.spaceBetween,
@@ -88,9 +91,10 @@ class _Navigation_WidgetState extends State<Navigation_Widget> {
           children: [
             (bottomBarPages.length <= maxCount)
                 ? BottomNavigationBar(
-                    elevation: 0,
+               backgroundColor: Theme.of(context).primaryColorLight.withOpacity(0.9),
+                    elevation: 1,
+                    useLegacyColorScheme: true,
                     type: BottomNavigationBarType.fixed,
-
                     onTap: (index) {
                       _pageController.jumpToPage(index);
                     },
@@ -104,6 +108,7 @@ class _Navigation_WidgetState extends State<Navigation_Widget> {
                           icon: Icon(Icons.timer,
                               color: Theme.of(context).primaryColor),
                           label: "History"),
+
                       BottomNavigationBarItem(
                           icon: Icon(Icons.percent,
                               color: Theme.of(context).primaryColor),

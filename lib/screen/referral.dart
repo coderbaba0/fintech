@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
 
-class Referral_Widget extends StatefulWidget {
-  const Referral_Widget({Key? key}) : super(key: key);
+class Profile extends StatefulWidget {
+  const Profile({Key? key}) : super(key: key);
 
   @override
-  State<Referral_Widget> createState() => _Referral_WidgetState();
+  State<Profile> createState() => _ProfileState();
 }
 
-class _Referral_WidgetState extends State<Referral_Widget> {
+class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     final _size = MediaQuery.of(context).size;
 
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.only(top: 20.0,left: 8,right: 8),
         child: Column(
           children: [
-            SizedBox(height: _size.height*0.03,),
+            SizedBox(height:20,),
             Container(
                 width: _size.width * 1,
                 child: Card(
@@ -25,11 +25,11 @@ class _Referral_WidgetState extends State<Referral_Widget> {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         gradient: LinearGradient(
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
+                            begin: Alignment.centerLeft,
+                            end: Alignment.centerRight,
                             colors: [
-                              Color(0xFF086C57),
-                              Color(0xFF199F85)
+                              Color(0xFFCBEEBA),
+                              Color(0xFFFFB6B6),
                             ])),
                     child: Padding(
                       padding: const EdgeInsets.all(12),
@@ -45,21 +45,21 @@ class _Referral_WidgetState extends State<Referral_Widget> {
                                   "Refer and Earn 10% Extra",
                                   style: TextStyle(
                                       fontWeight: FontWeight.w500,
-                                      color: Colors.white,fontSize: 17),
+                                      color: Colors.black,fontSize: 17),
                                 ),
 
-                               Icon(Icons.info_outline,size: 25,color: Colors.white,)
+                               Icon(Icons.info_outline,size: 25,color: Colors.green,)
                               ],
                             ),
                             Container(
                               width: _size.width*0.7,
                               child: Text(
 
-                                "Hello Active Advisors! Refer BankSathi app to Your freinds and family to earn extra 10% of their earning",
+                                "Hello User! Refer Intrust app to Your freinds and family to earn extra 20% of their earning",
                                 style: TextStyle(
                                     fontSize: 12,
                                     fontWeight: FontWeight.w400,
-                                    color: Colors.white),
+                                    color:  Colors.black),
                                 maxLines: 2,overflow: TextOverflow.ellipsis,
                               ),
                             ),
@@ -76,25 +76,25 @@ class _Referral_WidgetState extends State<Referral_Widget> {
                                       style: TextStyle(
                                           fontSize: 13,
                                           fontWeight: FontWeight.w400,
-                                          color:Colors.white),
+                                          color: Colors.black),
                                     ),
                                     Container(
                                       width: _size.width*0.3,
 
                                       child: Text(
-                                        "201829282",
+                                        "2010121",
                                         maxLines: 2,overflow: TextOverflow.ellipsis,
                                         style: TextStyle(
                                             fontSize: 20,
                                             fontWeight: FontWeight.w400,
-                                            color: Colors.white),textAlign: TextAlign.center,
+                                            color:  Colors.black),textAlign: TextAlign.center,
                                       ),
                                     ),
                                   ],
                                 ),
                                 Container(
                                   width: 40,
-                                  height: 40,
+                                  height: 35,
                                   decoration: BoxDecoration(
                                     border: Border.all(color: Colors.white),
                                     borderRadius: BorderRadius.circular(8)
