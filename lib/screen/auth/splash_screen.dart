@@ -15,7 +15,7 @@ class _SplashScreenState extends State<SplashScreen>
   void initState() {
     // TODO: implement initState
     _animationController =
-        AnimationController(vsync: this, duration: const Duration(seconds: 5));
+        AnimationController(vsync: this, duration: const Duration(seconds: 4));
     _animationController.forward();
     super.initState();
     _loadWidget();
@@ -31,8 +31,8 @@ class _SplashScreenState extends State<SplashScreen>
   }
   void navigationPage() {
     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>
-        // LoginPage()));
-        Navigation_Widget()));
+        LoginPage()));
+        // Navigation_Widget()));
   }
   @override
   Widget build(BuildContext context) {

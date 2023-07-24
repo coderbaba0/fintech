@@ -1,10 +1,10 @@
-import 'package:banking/screen/Credit%20Cards.dart';
 import 'package:banking/screen/my_team.dart';
 import 'package:banking/screen/referral.dart';
 import 'package:flutter/material.dart';
 
 import 'home.dart';
 import 'leads.dart';
+import 'offeroncoins.dart';
 
 class Navigation_Widget extends StatefulWidget {
   const Navigation_Widget({Key? key}) : super(key: key);
@@ -24,7 +24,7 @@ class _Navigation_WidgetState extends State<Navigation_Widget> {
   List<Widget> bottomBarPages = [
     Home_Widget(),
     History(),
-    CreaditCard_Widget(),
+    Offersoncoins(),
     Profile(),
     My_Team_Widget()
   ];

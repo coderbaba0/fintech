@@ -167,7 +167,7 @@ class _MyProfile_WidgetState extends State<MyProfile_Widget> {
               SizedBox(height: 10,),
               ListTile(
                 onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>Personal_Details()));
+                  // Navigator.push(context, MaterialPageRoute(builder: (context)=>Personal_Details()));
                 },
                 leading: Image.asset("images/use.png",height: Size.toDouble(),color: Theme.of(context).primaryColor),
                 title: Text("Personal Details",style: TextStyle(fontFamily: "Poppins"),),
@@ -178,7 +178,7 @@ class _MyProfile_WidgetState extends State<MyProfile_Widget> {
               ),
               ListTile(
                 onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>Payment_Bank()));
+                  // Navigator.push(context, MaterialPageRoute(builder: (context)=>Payment_Bank()));
 
                 },
                 leading: Image.asset("images/wallet.png",height: Size.toDouble(),color: Theme.of(context).primaryColor),
@@ -190,7 +190,7 @@ class _MyProfile_WidgetState extends State<MyProfile_Widget> {
               ),
               ListTile(
                 onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>Professional_Details()));
+                  // Navigator.push(context, MaterialPageRoute(builder: (context)=>Professional_Details()));
 
                 },
                 leading: Image.asset("images/waiter.png",height: Size.toDouble(),color: Theme.of(context).primaryColor),
@@ -235,7 +235,6 @@ class _MyProfile_WidgetState extends State<MyProfile_Widget> {
                 title: Text("M-PIN",style: TextStyle(fontFamily: "Poppins"),),
                 subtitle: Text("Your key to Security"),
                 trailing: Container(
-
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(primary: Color(0xFF1FA403)),
                     onPressed: (){},child: Text("SETUP",style: TextStyle(color: Colors.white,fontSize: 15),),),
@@ -244,6 +243,7 @@ class _MyProfile_WidgetState extends State<MyProfile_Widget> {
               Consumer(
                 builder: (context, ThemeNotifier themeNotifier, child) =>
                     SwitchListTile(
+                      secondary: Icon(Icons.sunny),
                       title: Text("Dark Mode"),
                       onChanged: (val) {
                         themeNotifier.toggleTheme();
@@ -251,7 +251,7 @@ class _MyProfile_WidgetState extends State<MyProfile_Widget> {
                       value: themeNotifier.darkThemes,
                     ),
               ),
-              Text("OTHER LINKS",style: TextStyle(color: Color(0xFFAB72D9) ),),
+              Text("OTHER LINKS",style: TextStyle(color: Color(0xFFFFFFFF) ),),
               ListTile(
                 leading: Icon(Icons.privacy_tip_outlined,size: Size.toDouble(),color:Theme.of(context).primaryColor),
                 title: Text("Privacy Policy",style: TextStyle(fontFamily: "Poppins"),),

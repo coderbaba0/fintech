@@ -1,8 +1,13 @@
 
+import 'dart:convert';
+
 import 'package:banking/screen/auth/signup.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:http/http.dart' as http;
 
+import '../widget/randomnumbergentrate.dart';
 import 'otpscreen.dart';
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -12,8 +17,15 @@ class LoginPage extends StatefulWidget {
 }
 class _LoginPageState extends State<LoginPage> {
   String? mobile;
+  int otp=0;
   final _formKey = GlobalKey<FormState>();
   TextEditingController mobilecontroller = TextEditingController();
+  @override
+  void initState() {
+    // TODO: implement initState
+    otp=(RandomDigits.getInteger(4));
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
@@ -148,11 +160,7 @@ class _LoginPageState extends State<LoginPage> {
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
                       _formKey.currentState!.save();
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => OtpScreen(),
-                          ));
+                      sendotp(otp,int.parse(mobilecontroller.text));
                       //write submit function code
                     }
                   },
@@ -188,5 +196,34 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
+  }
+  Future<dynamic> sendotp(int otp,int mobile) async {
+    final response = await http.get(
+      Uri.parse('https://www.fast2sms.com/dev/bulkV2?authorization=7NeL2D85Xt3sZpSnVoMkuqGIWigPaK1m4FjfcYx6hbdElRTJB9d84sSghX3jwnyWTp70GeFBLklQ9cbJ&route=otp&variables_values=$otp&flash=0&numbers=$mobile'),
+    );
+    var data = jsonDecode(response.body.toString());
+    // print(data);
+    if (response.statusCode == 200) {
+      Fluttertoast.showToast(
+        msg: 'OTP Sent Successfully!',
+        backgroundColor: Colors.black,
+        toastLength: Toast.LENGTH_LONG,
+        gravity: ToastGravity.CENTER,
+      );
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => OtpScreen(mobile: mobile,otp: otp,),
+          ));
+      return data;
+    } else {
+      Fluttertoast.showToast(
+        msg: 'Something gone wrong!',
+        backgroundColor: Colors.black,
+        toastLength: Toast.LENGTH_LONG,
+        gravity: ToastGravity.CENTER,
+      );
+      throw Exception('Failed to load ');
+    }
   }
 }

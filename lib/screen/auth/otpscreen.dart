@@ -1,12 +1,19 @@
 import 'dart:async';
+import 'dart:convert';
 
+import 'package:http/http.dart' as http;
 
 import 'package:banking/screen/auth/verifypan.dart';
 import 'package:banking/screen/widget/OtpInput.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+
+import '../widget/randomnumbergentrate.dart';
 class OtpScreen extends StatefulWidget {
-  const OtpScreen({Key? key}) : super(key: key);
+  const OtpScreen({Key? key, required this.mobile, required this.otp}) : super(key: key);
+  final int mobile;
+  final int otp;
 
   @override
   State<OtpScreen> createState() => _OtpScreenState();
@@ -18,11 +25,10 @@ class _OtpScreenState extends State<OtpScreen> {
   final TextEditingController _fieldFour = TextEditingController();
 
   final interval = const Duration(seconds: 1);
+  int otp=(RandomDigits.getInteger(4));
 
   final int timerMaxSeconds = 60;
-
   int currentSeconds = 0;
-
   String get timerText =>
       '${((timerMaxSeconds - currentSeconds) ~/ 60).toString().padLeft(2, '0')}: ${((timerMaxSeconds - currentSeconds) % 60).toString().padLeft(2, '0')}';
 
@@ -53,9 +59,9 @@ class _OtpScreenState extends State<OtpScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  IconButton(onPressed: (){
-                    Navigator.pop(context);
-                  }, icon: Icon(Icons.arrow_back)),
+                  // IconButton(onPressed: (){
+                  //   Navigator.pop(context);
+                  // }, icon: Icon(Icons.arrow_back)),
                   Padding(
                     padding: const EdgeInsets.only(left: 10.0),
                     child: Text('OTP',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
@@ -83,19 +89,13 @@ class _OtpScreenState extends State<OtpScreen> {
               RichText(
                 textAlign: TextAlign.center,
                 text:   TextSpan(
-                  text: 'We have sent verification code \n  to  your mobile number. \n+91 8899599075 ',style: TextStyle(fontSize: 16,color: Theme.of(context).primaryColor),
+                  text: 'We have sent verification code \n  to  your mobile number. \n+91'+widget.mobile.toString(),style: TextStyle(fontSize: 16,color: Theme.of(context).primaryColor),
                   children: <TextSpan>[
 
                     TextSpan(text: ' Edit',style: TextStyle(fontSize: 18,color: Colors.red,fontWeight: FontWeight.bold),
                         recognizer: TapGestureRecognizer()
                           ..onTap = () {
-                            print('bac');
-                            // Navigator.push(
-                            //     context,
-                            //     MaterialPageRoute(
-                            //       builder: (context) => SignupScreen(
-                            //       ),
-                            //     ));
+                            Navigator.pop(context);
                           }
                     ),
                   ],
@@ -153,12 +153,30 @@ class _OtpScreenState extends State<OtpScreen> {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10))),
                   onPressed: () {
-                   Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => VerifyPan(
-                          ),
-                        ));
+                    print(widget.otp.toString());
+                    if(widget.otp.toString()==_fieldOne.text+_fieldTwo.text+_fieldThree.text+_fieldFour.text)
+                      {
+                        Fluttertoast.showToast(
+                          msg: 'Successfully Verified!',
+                          backgroundColor: Colors.black,
+                          toastLength: Toast.LENGTH_LONG,
+                          gravity: ToastGravity.CENTER,
+                        );
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => VerifyPan(
+                              ),
+                            ));
+                      }
+                    else{
+                      Fluttertoast.showToast(
+                        msg: 'Somthing got wrong, Check your code!',
+                        backgroundColor: Colors.black,
+                        toastLength: Toast.LENGTH_LONG,
+                        gravity: ToastGravity.CENTER,
+                      );
+                    }
                   },
                   child: Text(
                     "Verify OTP ",
@@ -171,6 +189,7 @@ class _OtpScreenState extends State<OtpScreen> {
               ),
               InkWell(
                   onTap: (){
+                    sendotp(otp,widget.mobile);
                     //resend otp code
                   },
                   child: Center(child: Text('Resend OTP',style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),))),
@@ -184,5 +203,34 @@ class _OtpScreenState extends State<OtpScreen> {
         ),
       ),
     );
+  }
+  Future<dynamic> sendotp(int otp,int mobile) async {
+    final response = await http.get(
+      Uri.parse('https://www.fast2sms.com/dev/bulkV2?authorization=7NeL2D85Xt3sZpSnVoMkuqGIWigPaK1m4FjfcYx6hbdElRTJB9d84sSghX3jwnyWTp70GeFBLklQ9cbJ&route=otp&variables_values=$otp&flash=0&numbers=$mobile'),
+    );
+    var data = jsonDecode(response.body.toString());
+    // print(data);
+    if (response.statusCode == 200) {
+      Fluttertoast.showToast(
+        msg: 'OTP Sent Successfully!',
+        backgroundColor: Colors.black,
+        toastLength: Toast.LENGTH_LONG,
+        gravity: ToastGravity.CENTER,
+      );
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => OtpScreen(mobile: mobile,otp: otp,),
+          ));
+      return data;
+    } else {
+      Fluttertoast.showToast(
+        msg: 'Something gone wrong!',
+        backgroundColor: Colors.black,
+        toastLength: Toast.LENGTH_LONG,
+        gravity: ToastGravity.CENTER,
+      );
+      throw Exception('Failed to load ');
+    }
   }
 }
