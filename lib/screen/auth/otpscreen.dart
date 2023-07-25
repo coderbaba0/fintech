@@ -161,7 +161,6 @@ class _OtpScreenState extends State<OtpScreen> {
                       );
                     }
                     else{
-
                       if(widget.otp.toString()==_fieldOne.text+_fieldTwo.text+_fieldThree.text+_fieldFour.text)
                       {
                         Fluttertoast.showToast(
@@ -211,7 +210,6 @@ class _OtpScreenState extends State<OtpScreen> {
               SizedBox(
                 height:10,
               ),
-
               isloading?
               Container(width:40,height:40,child: ColorLoader3()):Container(),
             ],
