@@ -1,7 +1,12 @@
+import 'dart:convert';
+
 import 'package:banking/screen/widget/OtpInput.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:http/http.dart' as http;
+import '../widget/custom_loader.dart';
+import '../widget/randomnumbergentrate.dart';
 import 'otpscreen.dart';
 class Signup extends StatefulWidget {
   const Signup({Key? key}) : super(key: key);
@@ -14,13 +19,20 @@ class _SignupState extends State<Signup> {
   String? mobile;
   String? email;
   String? address;
+  int otp=0;
+  bool isloading =false;
 
   final _formKey = GlobalKey<FormState>();
   final TextEditingController namectrl = TextEditingController();
   final TextEditingController mobilectrl = TextEditingController();
   final TextEditingController emailctrl = TextEditingController();
   final TextEditingController addressctrl = TextEditingController();
-
+  @override
+  void initState() {
+    // TODO: implement initState
+    otp=(RandomDigits.getInteger(4));
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
@@ -314,16 +326,18 @@ class _SignupState extends State<Signup> {
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10))),
                     onPressed: () {
+
+
                       if (_formKey.currentState!.validate()) {
                         _formKey.currentState!.save();
-                        // Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //       builder: (context) => OtpScreen(),
-                        //     ));
+                        setState(() {
+                          isloading = true;
+                        });
+                        sendotp(otp,int.parse(mobilectrl.text)).then((value) => setState(() {
+                          isloading = false;
+                        }));
                         //write submit function code
                       }
-
                     },
                     child: Text(
                       "Create Account ",
@@ -331,7 +345,11 @@ class _SignupState extends State<Signup> {
                     ),
                   ),
                 ),
-
+                SizedBox(
+                  height: 20,
+                ),
+                isloading?
+                Container(width:40,height:40,child: ColorLoader3()):Container(),
 
               ],
             ),
@@ -340,4 +358,40 @@ class _SignupState extends State<Signup> {
       ),
     );
   }
+  Future<dynamic> sendotp(int otp,int mobile) async {
+    final response = await http.get(
+      Uri.parse('https://www.fast2sms.com/dev/bulkV2?authorization=7NeL2D85Xt3sZpSnVoMkuqGIWigPaK1m4FjfcYx6hbdElRTJB9d84sSghX3jwnyWTp70GeFBLklQ9cbJ&route=otp&variables_values=$otp&flash=0&numbers=$mobile'),
+    );
+    var data = jsonDecode(response.body.toString());
+    // print(data);
+    if (response.statusCode == 200) {
+      setState(() {
+        isloading = false;
+      });
+      Fluttertoast.showToast(
+        msg: 'OTP Sent Successfully!',
+        backgroundColor: Colors.black,
+        toastLength: Toast.LENGTH_LONG,
+        gravity: ToastGravity.CENTER,
+      );
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => OtpScreen(mobile: mobile,otp: otp,),
+          ));
+      return data;
+    } else {
+      setState(() {
+        isloading = false;
+      });
+      Fluttertoast.showToast(
+        msg: 'Something went wrong!',
+        backgroundColor: Colors.black,
+        toastLength: Toast.LENGTH_LONG,
+        gravity: ToastGravity.CENTER,
+      );
+      throw Exception('Failed to load ');
+    }
+  }
 }
+

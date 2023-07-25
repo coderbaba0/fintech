@@ -8,13 +8,12 @@ import 'package:banking/screen/widget/OtpInput.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-
+import '../widget/custom_loader.dart';
 import '../widget/randomnumbergentrate.dart';
 class OtpScreen extends StatefulWidget {
   const OtpScreen({Key? key, required this.mobile, required this.otp}) : super(key: key);
   final int mobile;
   final int otp;
-
   @override
   State<OtpScreen> createState() => _OtpScreenState();
 }
@@ -23,6 +22,7 @@ class _OtpScreenState extends State<OtpScreen> {
   final TextEditingController _fieldTwo = TextEditingController();
   final TextEditingController _fieldThree = TextEditingController();
   final TextEditingController _fieldFour = TextEditingController();
+  bool isloading =false;
 
   final interval = const Duration(seconds: 1);
   int otp=(RandomDigits.getInteger(4));
@@ -153,8 +153,17 @@ class _OtpScreenState extends State<OtpScreen> {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10))),
                   onPressed: () {
-                    print(widget.otp.toString());
-                    if(widget.otp.toString()==_fieldOne.text+_fieldTwo.text+_fieldThree.text+_fieldFour.text)
+                    if(_fieldOne.text.isEmpty || _fieldTwo.text.isEmpty || _fieldThree.text.isEmpty || _fieldFour.text.isEmpty){
+                      Fluttertoast.showToast(
+                        msg: 'Please Enter Your OTP Code',
+                        backgroundColor: Colors.black,
+                        toastLength: Toast.LENGTH_LONG,
+                        gravity: ToastGravity.CENTER,
+                      );
+                    }
+                    else{
+
+                      if(widget.otp.toString()==_fieldOne.text+_fieldTwo.text+_fieldThree.text+_fieldFour.text)
                       {
                         Fluttertoast.showToast(
                           msg: 'Successfully Verified!',
@@ -169,13 +178,15 @@ class _OtpScreenState extends State<OtpScreen> {
                               ),
                             ));
                       }
-                    else{
-                      Fluttertoast.showToast(
-                        msg: 'Somthing got wrong, Check your code!',
-                        backgroundColor: Colors.black,
-                        toastLength: Toast.LENGTH_LONG,
-                        gravity: ToastGravity.CENTER,
-                      );
+                      else{
+                        Fluttertoast.showToast(
+                          msg: 'Somthing got wrong, Check your code!',
+                          backgroundColor: Colors.black,
+                          toastLength: Toast.LENGTH_LONG,
+                          gravity: ToastGravity.CENTER,
+                        );
+                    }
+
                     }
                   },
                   child: Text(
@@ -189,15 +200,21 @@ class _OtpScreenState extends State<OtpScreen> {
               ),
               InkWell(
                   onTap: (){
-                    sendotp(otp,widget.mobile);
+                    setState(() {
+                      isloading = true;
+                    });
+                    sendotp(otp,widget.mobile).then((value) => setState(() {
+                      isloading = false;
+                    }));
                     //resend otp code
                   },
                   child: Center(child: Text('Resend OTP',style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),))),
-
               SizedBox(
-                height:2,
+                height:10,
               ),
 
+              isloading?
+              Container(width:40,height:40,child: ColorLoader3()):Container(),
             ],
           ),
         ),
@@ -211,6 +228,9 @@ class _OtpScreenState extends State<OtpScreen> {
     var data = jsonDecode(response.body.toString());
     // print(data);
     if (response.statusCode == 200) {
+      setState(() {
+        isloading = false;
+      });
       Fluttertoast.showToast(
         msg: 'OTP Sent Successfully!',
         backgroundColor: Colors.black,
@@ -224,8 +244,11 @@ class _OtpScreenState extends State<OtpScreen> {
           ));
       return data;
     } else {
+      setState(() {
+        isloading = false;
+      });
       Fluttertoast.showToast(
-        msg: 'Something gone wrong!',
+        msg: 'Something went wrong!',
         backgroundColor: Colors.black,
         toastLength: Toast.LENGTH_LONG,
         gravity: ToastGravity.CENTER,

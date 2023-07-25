@@ -2,7 +2,7 @@
     package="com.example.banking">
     <uses-permission android:name="android.permission.USE_BIOMETRIC"/>
     <application
-        android:label="banking"
+        android:label="Intrust Finance"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

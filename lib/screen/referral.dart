@@ -57,7 +57,6 @@ class _ProfileState extends State<Profile> {
                 // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> Notifications()));
               },
               child:IconButton(onPressed: (){
-
               },icon: Icon(Icons.logout,color: Theme.of(context).primaryColor,),),
             ),
           )
@@ -148,7 +147,7 @@ class _ProfileState extends State<Profile> {
                                     Text(
                                       "Basic",
                                       style: TextStyle(
-                                          fontSize: 16,
+                                          fontSize: 14,
                                           color: Colors.black),
                                     ),
                                     SizedBox(
@@ -157,7 +156,7 @@ class _ProfileState extends State<Profile> {
                                     Text(
                                       "₹ 5,000.00",
                                       style: TextStyle(
-                                          fontSize: 16,
+                                          fontSize: 14,
                                           fontWeight: FontWeight.bold,
                                           color: Colors.green),
                                     )
@@ -179,7 +178,7 @@ class _ProfileState extends State<Profile> {
                                     Text(
                                       "Premium",
                                       style: TextStyle(
-                                          fontSize: 16,
+                                          fontSize: 14,
                                           color: Colors.black),
                                     ),
                                     SizedBox(
@@ -188,7 +187,7 @@ class _ProfileState extends State<Profile> {
                                     Text(
                                       "₹ 5,000.00",
                                       style: TextStyle(
-                                          fontSize: 16,
+                                          fontSize: 14,
                                           fontWeight: FontWeight.bold,
                                           color: Colors.green),
                                     )

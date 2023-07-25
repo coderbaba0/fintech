@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
             builder: (context, ThemeNotifier themeNotifier, child) {
             return MaterialApp(
               debugShowCheckedModeBanner: false,
-              title: 'Intrust Financial Service',
+              title: 'Intrust Financial Services',
               theme: themeNotifier.darkThemes ? darkTheme : lightTheme,
               home: SplashScreen(),
              );

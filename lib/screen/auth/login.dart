@@ -7,17 +7,18 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 
+import '../widget/custom_loader.dart';
 import '../widget/randomnumbergentrate.dart';
 import 'otpscreen.dart';
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
-
   @override
   State<LoginPage> createState() => _LoginPageState();
 }
 class _LoginPageState extends State<LoginPage> {
   String? mobile;
   int otp=0;
+  bool isloading =false;
   final _formKey = GlobalKey<FormState>();
   TextEditingController mobilecontroller = TextEditingController();
   @override
@@ -90,7 +91,6 @@ class _LoginPageState extends State<LoginPage> {
                     style: TextStyle(color: Colors.black,),
                     cursorColor: Colors.black,
                     decoration: InputDecoration(
-
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(5.0),
                         borderSide: BorderSide(color: Colors.white60),
@@ -160,7 +160,12 @@ class _LoginPageState extends State<LoginPage> {
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
                       _formKey.currentState!.save();
-                      sendotp(otp,int.parse(mobilecontroller.text));
+                      setState(() {
+                        isloading = true;
+                      });
+                      sendotp(otp,int.parse(mobilecontroller.text)).then((value) => setState(() {
+                        isloading = false;
+                      }));
                       //write submit function code
                     }
                   },
@@ -191,6 +196,11 @@ class _LoginPageState extends State<LoginPage> {
                 ],
               ),
             ),
+              SizedBox(
+                height: 20,
+              ),
+              isloading?
+              Container(width:40,height:40,child: ColorLoader3()):Container(),
             ],
           ),
         ),
@@ -204,6 +214,9 @@ class _LoginPageState extends State<LoginPage> {
     var data = jsonDecode(response.body.toString());
     // print(data);
     if (response.statusCode == 200) {
+      setState(() {
+        isloading = false;
+      });
       Fluttertoast.showToast(
         msg: 'OTP Sent Successfully!',
         backgroundColor: Colors.black,
@@ -217,8 +230,11 @@ class _LoginPageState extends State<LoginPage> {
           ));
       return data;
     } else {
+      setState(() {
+        isloading = false;
+      });
       Fluttertoast.showToast(
-        msg: 'Something gone wrong!',
+        msg: 'Something went wrong!',
         backgroundColor: Colors.black,
         toastLength: Toast.LENGTH_LONG,
         gravity: ToastGravity.CENTER,

@@ -429,7 +429,7 @@ class _Home_WidgetState extends State<Home_Widget> {
                             children: [
                               CircleAvatar(
                                 radius:26,
-                                backgroundColor:Color(0xFF336B18),
+                                backgroundColor:Color(0xFFB474E5),
                                 child: Icon(Icons.price_change),
                               ),
                               SizedBox(
