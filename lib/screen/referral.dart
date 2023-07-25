@@ -38,7 +38,6 @@ class _ProfileState extends State<Profile> {
             SizedBox(
               width: _size.width * 0.03,
             ),
-
             Text(
               "Abhishek",
               style: TextStyle(

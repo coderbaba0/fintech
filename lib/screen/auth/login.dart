@@ -214,9 +214,6 @@ class _LoginPageState extends State<LoginPage> {
     var data = jsonDecode(response.body.toString());
     // print(data);
     if (response.statusCode == 200) {
-      setState(() {
-        isloading = false;
-      });
       Fluttertoast.showToast(
         msg: 'OTP Sent Successfully!',
         backgroundColor: Colors.black,
@@ -230,9 +227,6 @@ class _LoginPageState extends State<LoginPage> {
           ));
       return data;
     } else {
-      setState(() {
-        isloading = false;
-      });
       Fluttertoast.showToast(
         msg: 'Something went wrong!',
         backgroundColor: Colors.black,

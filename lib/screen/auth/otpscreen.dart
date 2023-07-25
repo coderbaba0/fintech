@@ -26,7 +26,6 @@ class _OtpScreenState extends State<OtpScreen> {
 
   final interval = const Duration(seconds: 1);
   int otp=(RandomDigits.getInteger(4));
-
   final int timerMaxSeconds = 60;
   int currentSeconds = 0;
   String get timerText =>
@@ -228,9 +227,6 @@ class _OtpScreenState extends State<OtpScreen> {
     var data = jsonDecode(response.body.toString());
     // print(data);
     if (response.statusCode == 200) {
-      setState(() {
-        isloading = false;
-      });
       Fluttertoast.showToast(
         msg: 'OTP Sent Successfully!',
         backgroundColor: Colors.black,
@@ -244,9 +240,6 @@ class _OtpScreenState extends State<OtpScreen> {
           ));
       return data;
     } else {
-      setState(() {
-        isloading = false;
-      });
       Fluttertoast.showToast(
         msg: 'Something went wrong!',
         backgroundColor: Colors.black,
